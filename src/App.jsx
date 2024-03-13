@@ -1,29 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./components/AddTask";
 import Header from "./components/Header";
 import ShowTask from "./components/ShowTask";
 import "./App.css";
 
+  // const initialTasks = [
+  //   {
+  //     id: 10001,
+  //     name: "TASK A",
+  //     time: "2:09:01 AM 9/14/2023",
+  //   },
+  //   {
+  //     id: 10002,
+  //     name: "TASK B",
+  //     time: "2:09:01 AM 9/14/2023",
+  //   },
+  //   {
+  //     id: 10003,
+  //     name: "TASK C",
+  //     time: "2:09:01 AM 9/14/2023",
+  //   },
+  // ];
+  
 function App() {
-  const initialTasks = [
-    {
-      id: 10001,
-      name: "TASK A",
-      time: "2:09:01 AM 9/14/2023",
-    },
-    {
-      id: 10002,
-      name: "TASK B",
-      time: "2:09:01 AM 9/14/2023",
-    },
-    {
-      id: 10003,
-      name: "TASK C",
-      time: "2:09:01 AM 9/14/2023",
-    },
-  ];
-  const [tasklist, setTasklist] = useState(initialTasks);
+
+  const [tasklist, setTasklist] = useState(JSON.parse(localStorage.getItem("tasklist")) || []);
   const [task, setTask] = useState({});
+
+  useEffect(() => {
+    localStorage.setItem("tasklist", JSON.stringify(tasklist));
+  },[tasklist])
 
   return (
     <>
